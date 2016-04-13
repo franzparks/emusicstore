@@ -4,7 +4,8 @@ app.config(function($routeProvider){
 	$routeProvider.
 	    when('/',{templateUrl: 'views/carousel.html'}).
 		when('/about',{templateUrl: 'views/about.html'}).
-		when('/products',{templateUrl: 'views/productList.html',controller: 'DesignCtrl'}).
+		when('/products',{templateUrl: 'views/productList.html',controller: 'ProductsCtrl'}).
+		when('/product/viewProduct/1',{templateUrl: 'views/viewProduct.html',controller: 'ProductCtrl'}).
 		otherwise({ redirectTo: '/' });
 
 });
@@ -26,10 +27,8 @@ app.controller('ProductsCtrl', function($scope) {
 	]
 });
 
-app.controller('DesignCtrl', function($scope) {
-	$scope.designers = [
-	    {"name":"Inna", "family":"Doe"}, 
-	    {"name":"Anna", "family":"Smith"},
-	    {"name":"Yafit", "family":"Jones"}
-	]
+app.controller('ProductCtrl', function($scope) {
+	$scope.product = {"productId":"1", "productName":"Grand Piano",
+			
+ "productCategory":"Instruments","productCondition": "New", "productPrice": "2330"};
 });
