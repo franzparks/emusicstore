@@ -18,13 +18,11 @@ app.controller('MainController', function($scope) {
 	$scope.text = "Hello World!!!!";
 });
 
-app.controller('DevCtrl', function($scope) {
-	$scope.developers = [
-	    {"name":"John", "family":"Doe"}, 
-	    {"name":"Anna", "family":"Smith"},
-	    {"name":"Peter", "family":"Jones"},
-	    {"name":"Alex", "family":"Volkov"}, 
-	    {"name":"Yaniv", "family":"Smith"},
+app.controller('ProductsCtrl', function($scope) {
+	$scope.products = [
+	    {"productId":"1", "productName":"Guiter", "productCategory":"Instruments","productCondition": "New", "productPrice": "230"},
+	    {"productId":"1", "productName":"Grand Piano", "productCategory":"Instruments","productCondition": "New", "productPrice": "2330"} 
+	   
 	]
 });
 
