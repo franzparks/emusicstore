@@ -1,34 +1,37 @@
-angular.module("eMusicStore", ["ngRoute"])
-        
-        .config(function ($routeProvider, $locationProvider) {
-        	
-        	//$locationProvider.html5Mode(true);
-        	
-            $routeProvider.when("#/product/productList/all", {
-                templateUrl: "views/productList.html",
-                controller: "mainPageCtrl"
-            });
-            $routeProvider.when("#/about", {
-                templateUrl: "views/about.html"
-            });
-            $routeProvider.when("/checkout", {
-                templateUrl: "views/checkoutSummary.html"
-              
-            });
-            $routeProvider.when("#/products", {
-                templateUrl: "productList.html"
-            });
-            $routeProvider.when("/complete", {
-                templateUrl: "views/thankYou.html"
-            });
-            $routeProvider.when("/placeorder", {
-                templateUrl: "views/placeOrder.html"
-            });
-            $routeProvider.otherwise({
-                templateUrl: "index.html"
-            }); 
-        })
-         .controller("mainPageCtrl", function($scope){
-        	 $scope.name = "hello!";
-         });   
-        
+//Apps
+var app = angular.module('eMusicStore', ['ngRoute']);
+app.config(function($routeProvider){
+	$routeProvider.
+	    when('/',{templateUrl: 'views/carousel.html'}).
+		when('/about',{templateUrl: 'views/about.html'}).
+		when('/products',{templateUrl: 'views/productList.html',controller: 'DesignCtrl'}).
+		otherwise({ redirectTo: '/' });
+
+});
+
+
+
+
+//Controllers
+
+app.controller('MainController', function($scope) {
+	$scope.text = "Hello World!!!!";
+});
+
+app.controller('DevCtrl', function($scope) {
+	$scope.developers = [
+	    {"name":"John", "family":"Doe"}, 
+	    {"name":"Anna", "family":"Smith"},
+	    {"name":"Peter", "family":"Jones"},
+	    {"name":"Alex", "family":"Volkov"}, 
+	    {"name":"Yaniv", "family":"Smith"},
+	]
+});
+
+app.controller('DesignCtrl', function($scope) {
+	$scope.designers = [
+	    {"name":"Inna", "family":"Doe"}, 
+	    {"name":"Anna", "family":"Smith"},
+	    {"name":"Yafit", "family":"Jones"}
+	]
+});
