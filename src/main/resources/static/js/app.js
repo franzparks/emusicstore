@@ -17,7 +17,7 @@ app.config(function($routeProvider){
 		.when('/about',{templateUrl: 'views/about.html'})
 		.when('/products',{templateUrl: 'views/productList.html',controller: 'ProductListCtrl'})
 		.when('/products/:productId',{templateUrl: 'views/viewProduct.html',controller: 'ProductDetailsCtrl'})
-        .when('/products/new', {templateUrl: 'views/products/addProduct.html', controller: 'ProductCreateCtrl'})
+        .when('/products/new', {templateUrl: 'views/addProduct.html', controller: 'ProductCreateCtrl'})
 		.otherwise({ redirectTo: '/' });
 
 });
