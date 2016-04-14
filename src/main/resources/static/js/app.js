@@ -41,12 +41,6 @@ app.controller('ProductListCtrl', function($scope,Product,$resource) {
 	
 });
 
-app.controller('ProductCtrl', function($scope) {
-	$scope.product = {"productId":"1", "productName":"Grand Piano",
-			
- "productCategory":"Instruments","productCondition": "New", "productPrice": "2330"};
-});
-
  
 app.controller('ProductCreateCtrl', function($scope, $routeParams, $location, Product) {
  
@@ -64,4 +58,7 @@ app.controller('ProductCreateCtrl', function($scope, $routeParams, $location, Pr
 app.controller('ProductDetailsCtrl', function($scope, $routeParams, $location, Product) {
     var productId = $routeParams.productId;
     $scope.product = Product.get({productId: productId});
+    $scope.product = {"productId":"1", "productName":"Grand Piano",
+			
+    		 "productCategory":"Instruments","productCondition": "New", "productPrice": "2330", "productManufacturer":"Sony"};
 });
