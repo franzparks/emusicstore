@@ -8,7 +8,7 @@ angular.module("getProducts.services", ["ngResource"]).
      return Product;
     });
 //Apps
-var app = angular.module('eMusicStore', ['ngRoute',getProducts.services]);
+var app = angular.module('eMusicStore', ['ngRoute','getProducts.services']);
  
 
 app.config(function($routeProvider){
@@ -18,8 +18,7 @@ app.config(function($routeProvider){
 		.when('/products',{templateUrl: 'views/productList.html',controller: 'ProductListCtrl'})
 		.when('/products/:productId',{templateUrl: 'views/viewProduct.html',controller: 'ProductDetailsCtrl'})
         .when('/products/new', {templateUrl: 'views/products/addProduct.html', controller: 'ProductCreateCtrl'})
-		
-		otherwise({ redirectTo: '/' });
+		.otherwise({ redirectTo: '/' });
 
 });
 
@@ -37,7 +36,7 @@ app.controller('ProductListCtrl', function($scope,Product,$resource) {
 	   
 	]
 	
-	 $scope.products = Product.query();
+	// $scope.products = Product.query();
 	
 	
 });
@@ -65,4 +64,4 @@ app.controller('ProductCreateCtrl', function($scope, $routeParams, $location, Pr
 app.controller('ProductDetailsCtrl', function($scope, $routeParams, $location, Product) {
     var productId = $routeParams.productId;
     $scope.product = Product.get({productId: productId});
-}
+});
