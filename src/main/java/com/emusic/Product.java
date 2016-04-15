@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 @Entity
 public class Product {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long productId;
@@ -22,6 +23,20 @@ public class Product {
 	private String productCategory;
 	private String productCondition;
 	private Double productPrice;
+	
+	public Product(){
+		
+	}
+	
+	public Product(String productName, String productCategory,
+			String productCondition, Double productPrice) {
+		super();
+		this.productName = productName;
+		this.productCategory = productCategory;
+		this.productCondition = productCondition;
+		this.productPrice = productPrice;
+	}
+	
 	/**
 	 * @return the productId
 	 */
