@@ -51,21 +51,13 @@ app.controller('MainController', function($scope) {
 });
 
 app.controller('ProductListCtrl', function($scope,ProductService) {
-	$scope.products1 = [
-	    {"productId":"1", "productName":"Guiter", "productCategory":"Instruments","productCondition": "New", "productPrice": "230"},
-	    {"productId":"1", "productName":"Grand Piano", "productCategory":"Instruments","productCondition": "New", "productPrice": "2330"} 
-	   
-	]
 	
 	$scope.products = []
 	ProductService.query(function (data) {
 		$scope.products = data["_embedded"]["products"];
-        //console.log("this data : "+Object.keys(data));
-		//console.log("this data : "+data["_embedded"]["products"][0]["productName"]);
     }, function () {
         console.log('FAILURE');
     });
-	
 	
 });
 
