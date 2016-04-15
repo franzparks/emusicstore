@@ -1,6 +1,13 @@
 # emusicstore
-An e-commerce app for music
+An e-commerce app for music.
 
+## Tools used
+SpringBoot
+AngularJS
+
+## System Requirements
+JDK 1.8 or later
+Maven 3.0+
 
 ## Running The Application
 
