@@ -1,15 +1,36 @@
 //Services
-angular.module("getProducts.services", ["ngResource"]).
- factory('Product', function ($resource) {
-       var Product = $resource('/products/:productId',{ productId:'@id'});
-         Product.prototype.isNew = function(){
-        return (typeof(this.id) === 'undefined');
-      }
-     return Product;
-    });
+angular.module('services', ['ngResource']).
+factory("ProductService", function ($resource) {
+    return $resource(
+        'http://localhost:8080/products/:productId', {}, {
+        get: {
+            method: 'GET',
+            transformRequest: function(data, headers){
+                headers = {'Content-Type': 'application/json'};
+                console.log(data);
+                return data;
+            },
+            transformResponse: function(data, headers){
+                //console.log(Object.keys(data));
+                return data;
+            }
+         
+        },
+        query: {
+            method: 'GET',
+            isArray: false,
+            transformResponse: function(data, header) {
+              return angular.fromJson(data);
+            }
+          }
+        	 	
+    }
+
+    );
+});
+
 //Apps
-var app = angular.module('eMusicStore', ['ngRoute','getProducts.services']);
- 
+var app = angular.module('eMusicStore', ['ngRoute','services']);
 
 app.config(function($routeProvider){
 	$routeProvider
@@ -29,14 +50,21 @@ app.controller('MainController', function($scope) {
 	$scope.text = "Hello World!!!!";
 });
 
-app.controller('ProductListCtrl', function($scope,Product,$resource) {
-	$scope.products = [
+app.controller('ProductListCtrl', function($scope,ProductService) {
+	$scope.products1 = [
 	    {"productId":"1", "productName":"Guiter", "productCategory":"Instruments","productCondition": "New", "productPrice": "230"},
 	    {"productId":"1", "productName":"Grand Piano", "productCategory":"Instruments","productCondition": "New", "productPrice": "2330"} 
 	   
 	]
 	
-	// $scope.products = Product.query();
+	$scope.products = []
+	ProductService.query(function (data) {
+		$scope.products = data["_embedded"]["products"];
+        //console.log("this data : "+Object.keys(data));
+		//console.log("this data : "+data["_embedded"]["products"][0]["productName"]);
+    }, function () {
+        console.log('FAILURE');
+    });
 	
 	
 });
