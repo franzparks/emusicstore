@@ -151,6 +151,7 @@ app.controller('cartCtrl', function($scope,sharedData){
 	$scope.removeFromCart = function(index){
 		console.log("removed index : "+ index);
 		$scope.cartItems.splice(index,1);
+		$scope.grandTotal = $scope.updateGrandTotal();
 	};
 });
 
