@@ -139,7 +139,7 @@ app.controller('cartCtrl', function($scope,sharedData){
 	
 	
 	$scope.getGrandTotal = function(){
-		return 300
+		return 300;
 	};
 	
 	$scope.removeFromCart = function(index){
