@@ -59,6 +59,8 @@ app.service('sharedData', function(){
 	  return {
 		    addProducts: addProducts,
 		    getProducts: getProducts,
+		    addCartItem: addCartItem,
+		    getCartItem: getCartItem,
 		    addIndex : addIndex,
 		    getIndex : getIndex
 		  };
@@ -121,8 +123,8 @@ app.controller('ProductDetailsCtrl', function($scope,sharedData) {
     
     $scope.product = sharedData.getProducts()[sharedData.getIndex()];
     
-    $scope.addToCart = function(product){
-		sharedData.addCartItem(product);
+    $scope.addToCart = function(){
+		sharedData.addCartItem($scope.product);
 	};
 	
     
@@ -130,8 +132,14 @@ app.controller('ProductDetailsCtrl', function($scope,sharedData) {
 
 
 
-app.controller('cartCtrl', function($scope){
+app.controller('cartCtrl', function($scope,sharedData){
+	$scope.cartItems = [];
+	$scope.grandTotal = 300;
+	$scope.cartItems.push(sharedData.getCartItem());
 	
+	$scope.getGrandTotal = function(){
+		return 300
+	};
 });
 
 

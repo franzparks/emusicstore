@@ -11,8 +11,8 @@
             </div>
         </section>
 
-        <section class="container">
-            <div ng-controller = "cartCtrl" ng-init="initCartId('${cartId}')">
+        <section class="container" ng-controller = "cartCtrl">
+            <div >
             <div>
                 <a class="btn btn-danger pull-left" ng-click="clearCart()"><span
                         class="glyphicon glyphicon-remove-sign"></span>Clear Cart</a>
@@ -29,9 +29,9 @@
                     <th>Price</th>
                     <th>Action</th>
                 </tr>
-                <tr ng-repeat = "item in cart.cartItems">
-                    <td>{{item.product.productName}}</td>
-                    <td>{{item.product.productPrice}}</td>
+                <tr ng-repeat = "item in cartItems">
+                    <td>{{item.productName}}</td>
+                    <td>{{item.productPrice}}</td>
                     <td>{{item.quantity}}</td>
                     <td>{{item.totalPrice}}</td>
                     <td><a href="#" class="label label-danger" ng-click="removeFromCart(item.product.productId)">
@@ -41,7 +41,7 @@
                     <th></th>
                     <th></th>
                     <th>Grand Total</th>
-                    <th>{{calGrandTotal()}}</th>
+                    <th ng-model="grandTotal"></th>
                     <th></th>
                 </tr>
             </table>
@@ -52,7 +52,3 @@
 
     </div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
-<script src="<c:url value="/resources/js/controller.js" /> "></script>
-<%@include file="/WEB-INF/views/template/footer.jsp" %>
