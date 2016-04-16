@@ -31,9 +31,9 @@
                 </tr>
                 <tr ng-repeat = "item in cartItems">
                     <td>{{item.productName}}</td>
-                    <td>{{item.productPrice}}</td>
+                    <td>{{item.productPrice | currency}}</td>
                     <td>{{item.quantity}}</td>
-                    <td>{{item.totalPrice}}</td>
+                    <td>{{item.totalPrice | currency}}</td>
                     <td><button class="label label-danger" ng-click="removeFromCart($index)">
                         <span class="glyphicon glyphicon-remove"></span>remove</button></td>
                 </tr>
@@ -41,7 +41,7 @@
                     <th></th>
                     <th></th>
                     <th>Grand Total</th>
-                    <th>{{grandTotal}}</th>
+                    <th>{{grandTotal | currency}}</th>
                     <th></th>
                 </tr>
             </table>
