@@ -134,14 +134,20 @@ app.controller('ProductDetailsCtrl', function($scope,sharedData) {
 
 app.controller('cartCtrl', function($scope,sharedData){
 	$scope.cartItems = [];
-	$scope.grandTotal = 300;
+	$scope.grandTotal = 0.00;
 	$scope.cartItems = sharedData.getCartItems()
 	
 	
-	$scope.getGrandTotal = function(){
-		return 300;
+	$scope.updateGrandTotal = function(){
+		var total = 0;
+		for(var i = 0; i < $scope.cartItems.length; ++i){
+			total += $scope.cartItems[i].productPrice;
+		}
+		
+		return total;
 	};
 	
+	$scope.grandTotal = $scope.updateGrandTotal();
 	$scope.removeFromCart = function(index){
 		console.log("removed index : "+ index);
 		$scope.cartItems.splice(index,1);
