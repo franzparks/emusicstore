@@ -108,15 +108,10 @@ app.controller('ProductCreateCtrl', function($scope, $routeParams, $location, Pr
  
 app.controller('ProductDetailsCtrl', function($scope,sharedData) {
 	$scope.product = {};
-	$scope.index = 0;
 	$scope.details = function(index){
-	   //console.log("index before :"+$scope.index);
 	   sharedData.addIndex(index);
-	  // console.log("index after :"+$scope.index);
-	   //$scope.product = sharedData.getProducts()[$scope.index];
     };
     
-    //console.log("am here now :"+$higherScope.index);
     $scope.product = sharedData.getProducts()[sharedData.getIndex()];
     
 });
