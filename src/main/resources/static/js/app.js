@@ -153,6 +153,11 @@ app.controller('cartCtrl', function($scope,sharedData){
 		$scope.cartItems.splice(index,1);
 		$scope.grandTotal = $scope.updateGrandTotal();
 	};
+	
+	$scope.clearCart = function(){
+		$scope.cartItems = [];
+		$scope.grandTotal = 0.00;
+	};
 });
 
 
