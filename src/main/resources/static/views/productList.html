@@ -16,13 +16,14 @@
             </thead>
             <tbody>
                 <tr ng-repeat="product in products">
-                    <td><img src="images/{{product.productId}}.jpg" alt="image" width="100%" /></td>
+                   
+                    <td><img src="" alt="image" width="100%" /></td>
                     <td>{{product.productName}}</td>
                     <td>{{product.productCategory}}</td>
                     <td>{{product.productCondition}}</td>
                     <td>{{product.productPrice | currency}}</td>
-                    <td><a href="#/products/{{product.productId}}" >
-                    <span class="glyphicon glyphicon-info-sign"></span></a></td>
+                    <td><a href="#/products/product/details">
+                    <span class="glyphicon glyphicon-info-sign" ng-controller="ProductDetailsCtrl"  ng-click="details($index)"> </span></a></td>
                 </tr>
           </tbody>
   </table>

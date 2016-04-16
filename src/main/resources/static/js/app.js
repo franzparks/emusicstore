@@ -2,7 +2,7 @@
 angular.module('services', ['ngResource']).
 factory("ProductService", function ($resource) {
     return $resource(
-        'http://localhost:8080/products/:productId', {}, {
+        '/products/:productId', {}, {
         get: {
             method: 'GET',
             transformRequest: function(data, headers){
@@ -24,20 +24,47 @@ factory("ProductService", function ($resource) {
             }
           }
         	 	
-    }
-
-    );
+    });
+    
+    
+    
 });
 
 //Apps
 var app = angular.module('eMusicStore', ['ngRoute','services']);
+app.service('sharedData', function(){
+	  var productList = [];
+	  var index = 0;
+      var addProducts = function(data){
+    	 productList = data;
+      }
+	  var getProducts = function(){
+		  return productList;
+	  };
+	  
+	  var addIndex = function(data){
+	    	 index = data;
+	      }
+		  var getIndex = function(){
+			  return index;
+		  };
+		  
+	  
+	  return {
+		    addProducts: addProducts,
+		    getProducts: getProducts,
+		    addIndex : addIndex,
+		    getIndex : getIndex
+		  };
+
+	});
 
 app.config(function($routeProvider){
 	$routeProvider
 	    .when('/',{templateUrl: 'views/carousel.html'})
 		.when('/about',{templateUrl: 'views/about.html'})
 		.when('/products',{templateUrl: 'views/productList.html',controller: 'ProductListCtrl'})
-		.when('/products/:productId',{templateUrl: 'views/viewProduct.html',controller: 'ProductDetailsCtrl'})
+		.when('/products/product/details',{templateUrl: 'views/viewProduct.html',controller: 'ProductListCtrl'})
         .when('/products/new', {templateUrl: 'views/addProduct.html', controller: 'ProductCreateCtrl'})
 		.otherwise({ redirectTo: '/' });
 
@@ -50,11 +77,15 @@ app.controller('MainController', function($scope) {
 	$scope.text = "Hello World!!!!";
 });
 
-app.controller('ProductListCtrl', function($scope,ProductService) {
+app.controller('ProductListCtrl', function($scope,ProductService, sharedData) {
 	
 	$scope.products = []
+	 $scope.prod = {};
+
 	ProductService.query(function (data) {
 		$scope.products = data["_embedded"]["products"];
+		sharedData.addProducts($scope.products);
+		//$scope.prod = $scope.products[0];
     }, function () {
         console.log('FAILURE');
     });
@@ -75,10 +106,17 @@ app.controller('ProductCreateCtrl', function($scope, $routeParams, $location, Pr
 });
  
  
-app.controller('ProductDetailsCtrl', function($scope, $routeParams, $location, Product) {
-    var productId = $routeParams.productId;
-    $scope.product = Product.get({productId: productId});
-    $scope.product = {"productId":"1", "productName":"Grand Piano",
-			
-    		 "productCategory":"Instruments","productCondition": "New", "productPrice": "2330", "productManufacturer":"Sony"};
+app.controller('ProductDetailsCtrl', function($scope,sharedData) {
+	$scope.product = {};
+	$scope.index = 0;
+	$scope.details = function(index){
+	   //console.log("index before :"+$scope.index);
+	   sharedData.addIndex(index);
+	  // console.log("index after :"+$scope.index);
+	   //$scope.product = sharedData.getProducts()[$scope.index];
+    };
+    
+    //console.log("am here now :"+$higherScope.index);
+    $scope.product = sharedData.getProducts()[sharedData.getIndex()];
+    
 });
