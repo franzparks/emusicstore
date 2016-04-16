@@ -115,3 +115,10 @@ app.controller('ProductDetailsCtrl', function($scope,sharedData) {
     $scope.product = sharedData.getProducts()[sharedData.getIndex()];
     
 });
+
+
+
+app.controller('cartCtrl', function($scope){
+	
+	
+});
