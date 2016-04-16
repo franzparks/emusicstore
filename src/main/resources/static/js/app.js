@@ -34,7 +34,7 @@ factory("ProductService", function ($resource) {
 var app = angular.module('eMusicStore', ['ngRoute','services']);
 app.service('sharedData', function(){
 	  var productList = [];
-	  var cartItem = {};
+	  var cartItems = [];
 	  var index = 0;
       var addProducts = function(data){
     	 productList = data;
@@ -43,10 +43,10 @@ app.service('sharedData', function(){
 		  return productList;
 	  };
 	  var addCartItem = function(product){
-	    	 cartItem = product;
+		  cartItems.push(product);
 	   }
-	  var getCartItem = function(){
-			  return cartItem;
+	  var getCartItems = function(){
+			  return cartItems;
 	  };
 	  var addIndex = function(data){
 	    	 index = data;
@@ -60,7 +60,7 @@ app.service('sharedData', function(){
 		    addProducts: addProducts,
 		    getProducts: getProducts,
 		    addCartItem: addCartItem,
-		    getCartItem: getCartItem,
+		    getCartItems: getCartItems,
 		    addIndex : addIndex,
 		    getIndex : getIndex
 		  };
@@ -135,7 +135,8 @@ app.controller('ProductDetailsCtrl', function($scope,sharedData) {
 app.controller('cartCtrl', function($scope,sharedData){
 	$scope.cartItems = [];
 	$scope.grandTotal = 300;
-	$scope.cartItems.push(sharedData.getCartItem());
+	$scope.cartItems = sharedData.getCartItems()
+	
 	
 	$scope.getGrandTotal = function(){
 		return 300
