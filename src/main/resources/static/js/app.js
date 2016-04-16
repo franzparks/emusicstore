@@ -122,3 +122,9 @@ app.controller('cartCtrl', function($scope){
 	
 	
 });
+
+app.controller('addToCart', function($scope,product){
+	
+	
+});
+
