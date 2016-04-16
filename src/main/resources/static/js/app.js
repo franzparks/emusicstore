@@ -66,8 +66,9 @@ app.config(function($routeProvider){
 		.when('/products',{templateUrl: 'views/productList.html',controller: 'ProductListCtrl'})
 		.when('/products/product/details',{templateUrl: 'views/viewProduct.html',controller: 'ProductListCtrl'})
         .when('/products/new', {templateUrl: 'views/addProduct.html', controller: 'ProductCreateCtrl'})
+        .when('/cart', {templateUrl: 'views/cart.html', controller: 'cartCtrl'})
 		.otherwise({ redirectTo: '/' });
-
+	
 });
 
 
