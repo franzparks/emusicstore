@@ -34,7 +34,7 @@ factory("ProductService", function ($resource) {
 var app = angular.module('eMusicStore', ['ngRoute','services']);
 app.service('sharedData', function(){
 	  var productList = [];
-	  var cartItems = [];
+	  var cartItems = {};
 	  var index = 0;
 	  
       var addProducts = function(data){
@@ -44,15 +44,15 @@ app.service('sharedData', function(){
 		  return productList;
 	  };
 	  var addCartItem = function(product){
-		  if(cartItems.indexOf(product) === -1){
-			console.log("we are in cond 1 index is :"+cartItems.indexOf(product));
-			product["quantity"] = 1;  
-		    cartItems.push(product);
+		  var productKey = product["productName"]+product["productCondition"]+product["productManufacturer"]+product["productPrice"]+
+		  product["productCategory"];
+		  if(cartItems[productKey]){
+			var prod = cartItems[productKey];
+		    prod["quantity"] += 1;
+		    cartItems[productKey] =  prod;  
 		  }else{
-			var prod = cartItems[cartItems.indexOf(product)];
-			console.log("index is :"+cartItems.indexOf(product));
-			prod["quantity"] += 1;
-			cartItems[cartItems.indexOf(product)] =  prod;
+				product["quantity"] = 1;  
+			    cartItems[productKey] = product;
 		  }
 	   }
 	  var getCartItems = function(){
@@ -144,8 +144,12 @@ app.controller('ProductDetailsCtrl', function($scope,sharedData) {
 app.controller('cartCtrl', function($scope,sharedData){
 	$scope.cartItems = [];
 	$scope.grandTotal = 0.00;
-	$scope.cartItems = sharedData.getCartItems()
 	
+	var items = sharedData.getCartItems();
+	
+	 for(var key in items){
+		$scope.cartItems.push(items[key]);
+	}
 	
 	$scope.updateGrandTotal = function(){
 		var total = 0;
