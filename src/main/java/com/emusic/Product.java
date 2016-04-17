@@ -23,6 +23,8 @@ public class Product {
 	private String productCategory;
 	private String productCondition;
 	private Double productPrice;
+	private String productDescription;
+	private String productManufacturer;
 	
 	public Product(){
 		
@@ -96,6 +98,34 @@ public class Product {
 	 */
 	public void setProductPrice(Double productPrice) {
 		this.productPrice = productPrice;
+	}
+
+	/**
+	 * @return the productDescription
+	 */
+	public String getProductDescription() {
+		return productDescription;
+	}
+
+	/**
+	 * @return the productManufacturer
+	 */
+	public String getProductManufacturer() {
+		return productManufacturer;
+	}
+
+	/**
+	 * @param productDescription the productDescription to set
+	 */
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
+	}
+
+	/**
+	 * @param productManufacturer the productManufacturer to set
+	 */
+	public void setProductManufacturer(String productManufacturer) {
+		this.productManufacturer = productManufacturer;
 	}
 
 	/* (non-Javadoc)
