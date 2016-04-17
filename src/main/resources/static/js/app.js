@@ -46,12 +46,15 @@ app.service('sharedData', function(){
 	  var addCartItem = function(product){
 		  var productKey = product["productName"]+product["productCondition"]+product["productManufacturer"]+product["productPrice"]+
 		  product["productCategory"];
+		  
 		  if(cartItems[productKey]){
 			var prod = cartItems[productKey];
 		    prod["quantity"] += 1;
+		    prod["totalPrice"] = prod["productPrice"] * prod["quantity"];
 		    cartItems[productKey] =  prod;  
 		  }else{
-				product["quantity"] = 1;  
+				product["quantity"] = 1; 
+				product["totalPrice"] = product["productPrice"];
 			    cartItems[productKey] = product;
 		  }
 	   }
