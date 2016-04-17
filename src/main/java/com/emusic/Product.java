@@ -171,5 +171,54 @@ public class Product {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Product))
+			return false;
+		Product other = (Product) obj;
+		if (productCategory == null) {
+			if (other.productCategory != null)
+				return false;
+		} else if (!productCategory.equals(other.productCategory))
+			return false;
+		if (productCondition == null) {
+			if (other.productCondition != null)
+				return false;
+		} else if (!productCondition.equals(other.productCondition))
+			return false;
+		if (productDescription == null) {
+			if (other.productDescription != null)
+				return false;
+		} else if (!productDescription.equals(other.productDescription))
+			return false;
+		if (productId != other.productId)
+			return false;
+		if (productManufacturer == null) {
+			if (other.productManufacturer != null)
+				return false;
+		} else if (!productManufacturer.equals(other.productManufacturer))
+			return false;
+		if (productName == null) {
+			if (other.productName != null)
+				return false;
+		} else if (!productName.equals(other.productName))
+			return false;
+		if (productPrice == null) {
+			if (other.productPrice != null)
+				return false;
+		} else if (!productPrice.equals(other.productPrice))
+			return false;
+		return true;
+	}
+
+	
+
 	
 }
