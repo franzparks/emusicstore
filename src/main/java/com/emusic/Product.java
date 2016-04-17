@@ -31,12 +31,15 @@ public class Product {
 	}
 	
 	public Product(String productName, String productCategory,
-			String productCondition, Double productPrice) {
+			String productCondition, Double productPrice,
+			String productDescription, String productManufacturer) {
 		super();
 		this.productName = productName;
 		this.productCategory = productCategory;
 		this.productCondition = productCondition;
 		this.productPrice = productPrice;
+		this.productDescription = productDescription;
+		this.productManufacturer = productManufacturer;
 	}
 	
 	/**
