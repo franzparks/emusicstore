@@ -36,6 +36,7 @@ app.service('sharedData', function(){
 	  var productList = [];
 	  var cartItems = [];
 	  var index = 0;
+	  
       var addProducts = function(data){
     	 productList = data;
       };
@@ -43,7 +44,16 @@ app.service('sharedData', function(){
 		  return productList;
 	  };
 	  var addCartItem = function(product){
-		  cartItems.push(product);
+		  if(cartItems.indexOf(product) === -1){
+			console.log("we are in cond 1 index is :"+cartItems.indexOf(product));
+			product["quantity"] = 1;  
+		    cartItems.push(product);
+		  }else{
+			var prod = cartItems[cartItems.indexOf(product)];
+			console.log("index is :"+cartItems.indexOf(product));
+			prod["quantity"] += 1;
+			cartItems[cartItems.indexOf(product)] =  prod;
+		  }
 	   }
 	  var getCartItems = function(){
 			  return cartItems;
@@ -94,7 +104,6 @@ app.controller('ProductListCtrl', function($scope,ProductService, sharedData) {
 	ProductService.query(function (data) {
 		$scope.products = data["_embedded"]["products"];
 		sharedData.addProducts($scope.products);
-		//$scope.prod = $scope.products[0];
     }, function () {
         console.log('FAILURE');
     });
