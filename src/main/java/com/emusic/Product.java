@@ -136,9 +136,37 @@ public class Product {
 		return "Product [productId=" + productId + ", productName="
 				+ productName + ", productCategory=" + productCategory
 				+ ", productCondition=" + productCondition + ", productPrice="
-				+ productPrice + "]";
+				+ productPrice + ", productDescription=" + productDescription
+				+ ", productManufacturer=" + productManufacturer + "]";
 	}
-	
-	
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((productCategory == null) ? 0 : productCategory.hashCode());
+		result = prime
+				* result
+				+ ((productCondition == null) ? 0 : productCondition.hashCode());
+		result = prime
+				* result
+				+ ((productDescription == null) ? 0 : productDescription
+						.hashCode());
+		result = prime * result + (int) (productId ^ (productId >>> 32));
+		result = prime
+				* result
+				+ ((productManufacturer == null) ? 0 : productManufacturer
+						.hashCode());
+		result = prime * result
+				+ ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result
+				+ ((productPrice == null) ? 0 : productPrice.hashCode());
+		return result;
+	}
+
+	
 }
