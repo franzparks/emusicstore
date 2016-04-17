@@ -157,7 +157,7 @@ app.controller('cartCtrl', function($scope,sharedData){
 	$scope.updateGrandTotal = function(){
 		var total = 0;
 		for(var i = 0; i < $scope.cartItems.length; ++i){
-			total += $scope.cartItems[i].productPrice;
+			total += $scope.cartItems[i].totalPrice;
 		}
 		
 		return total;
