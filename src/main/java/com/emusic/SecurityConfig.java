@@ -32,18 +32,17 @@ import org.springframework.web.util.WebUtils;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	  protected void configure(HttpSecurity http) throws Exception {
-	    http
-	      
+		http.headers().frameOptions().sameOrigin().httpStrictTransportSecurity().disable()
+		.and().csrf().csrfTokenRepository(csrfTokenRepository())
+	    .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
+	    http 
 	      .antMatcher("/**")
 	      .authorizeRequests()
 	        .antMatchers("/", "/login**", "/webjars/**")
-	        .permitAll()
+	        .permitAll()  
 	      .anyRequest()
 	      .authenticated()
-	      .and().headers().frameOptions().sameOrigin().httpStrictTransportSecurity().disable() //add same origin policy
-	      .and().logout().logoutSuccessUrl("/").permitAll()
-	    .and().csrf().csrfTokenRepository(csrfTokenRepository())
-	    .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
+	      .and().logout().logoutSuccessUrl("/").permitAll();
 	    
 	  }
 

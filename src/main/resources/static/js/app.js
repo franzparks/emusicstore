@@ -100,6 +100,8 @@ app.controller('MainController', function($http, $location) {
     $http.get("/user").success(function(data) {
       self.user = data.userAuthentication.details.name;
       self.authenticated = true;
+      console.log("here now!! : ");
+      //$location.path("/");
     }).error(function() {
       self.user = "N/A";
       self.authenticated = false;
