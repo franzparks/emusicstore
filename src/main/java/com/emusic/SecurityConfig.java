@@ -33,12 +33,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	  protected void configure(HttpSecurity http) throws Exception {
 	    http
+	      
 	      .antMatcher("/**")
 	      .authorizeRequests()
 	        .antMatchers("/", "/login**", "/webjars/**")
 	        .permitAll()
 	      .anyRequest()
 	      .authenticated()
+	      .and().headers().frameOptions().sameOrigin().httpStrictTransportSecurity().disable() //add same origin policy
 	      .and().logout().logoutSuccessUrl("/").permitAll()
 	    .and().csrf().csrfTokenRepository(csrfTokenRepository())
 	    .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
