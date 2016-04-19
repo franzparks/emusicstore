@@ -18,13 +18,13 @@
                         <li><a href="#/about">About Us</a></li>
                      
                     </ul>
-                    <div class="container" ng-show="!MainController.authenticated">
-	Login with: <a href="/login">Facebook</a>
-</div>
-<div class="container" ng-show="MainController.authenticated">
-	Logged in as: <span ng-bind="MainController.user"></span>
+                    <div class="" ng-show="!authenticated">
+	                     Login with: <a href="/login">Facebook</a>
+                       </div>
+<div class="container" ng-show="authenticated">
+	Logged in as: <span ng-bind="user"></span>
 	<div>
-    <button ng-click="MainController.logout()" class="btn btn-primary">Logout</button>
+    <button ng-click="logout()" class="btn btn-primary">Logout</button>
   </div>
 </div>
                    <!-- <ul class="nav navbar-nav pull-right">

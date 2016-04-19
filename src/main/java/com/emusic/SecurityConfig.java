@@ -35,14 +35,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().sameOrigin().httpStrictTransportSecurity().disable()
 		.and().csrf().csrfTokenRepository(csrfTokenRepository())
 	    .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
-	    http 
-	      .antMatcher("/**")
-	      .authorizeRequests()
-	        .antMatchers("/", "/login**", "/webjars/**")
-	        .permitAll()  
-	      .anyRequest()
-	      .authenticated()
-	      .and().logout().logoutSuccessUrl("/").permitAll();
+	    //http 
+	    //  .antMatcher("/**")
+	     // .authorizeRequests()
+	     //   .antMatchers("/", "/login**", "/webjars/**")
+	     //   .permitAll()  
+	     // .anyRequest()
+	    //  .authenticated();
+	      //.and().logout().logoutSuccessUrl("/").permitAll();
 	    
 	  }
 

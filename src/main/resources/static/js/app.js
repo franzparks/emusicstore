@@ -95,16 +95,16 @@ app.config(function($routeProvider){
 
 //Controllers
 
-app.controller('MainController', function($http, $location) {
-	var self = this;
+app.controller('MainController', function($scope,$http, $location) {
+	$scope.self = "";
     $http.get("/user").success(function(data) {
-      self.user = data.userAuthentication.details.name;
-      self.authenticated = true;
-      console.log("here now!! : ");
-      //$location.path("/");
+      $scope.user = data.userAuthentication.details.name;
+      $scope.authenticated = true;
+      console.log("here now!! : "+$scope.authenticated);
+      
     }).error(function() {
-      self.user = "N/A";
-      self.authenticated = false;
+      $scope.user = "N/A";
+      $scope.authenticated = false;
     });
     
     self.logout = function() {
