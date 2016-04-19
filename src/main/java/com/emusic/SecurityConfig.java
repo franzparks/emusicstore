@@ -39,8 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        .permitAll()
 	      .anyRequest()
 	      .authenticated()
+	      .and().logout().logoutSuccessUrl("/").permitAll()
 	    .and().csrf().csrfTokenRepository(csrfTokenRepository())
 	    .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
+	    
 	  }
 
 
