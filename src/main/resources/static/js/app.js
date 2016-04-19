@@ -112,7 +112,7 @@ app.controller('MainController', function($scope,$http, $location) {
           scope.authenticated = false;
           $location.path("/");
         }).error(function(data) {
-          console.log("Logout failed")
+          console.log("Logout failed + "+data)
           $scope.authenticated = false;
         });
       };
