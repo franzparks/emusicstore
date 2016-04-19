@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  *
  */
 @SpringBootApplication
-//@EnableOAuth2Sso
 public class EmusicstoreApplication{
 
 	
