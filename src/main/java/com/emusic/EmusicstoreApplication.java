@@ -9,8 +9,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth
  *
  */
 @SpringBootApplication
-@EnableOAuth2Sso
-public class EmusicstoreApplication {
+public class EmusicstoreApplication{
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmusicstoreApplication.class, args);
