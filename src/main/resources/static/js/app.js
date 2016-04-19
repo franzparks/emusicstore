@@ -95,8 +95,15 @@ app.config(function($routeProvider){
 
 //Controllers
 
-app.controller('MainController', function($scope) {
-	$scope.text = "Hello World!!!!";
+app.controller('MainController', function($http) {
+	var self = this;
+    $http.get("/user").success(function(data) {
+      self.user = data.userAuthentication.details.name;
+      self.authenticated = true;
+    }).error(function() {
+      self.user = "N/A";
+      self.authenticated = false;
+    });
 });
 
 app.controller('ProductListCtrl', function($scope,ProductService, sharedData) {

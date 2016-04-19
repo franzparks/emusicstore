@@ -18,6 +18,12 @@
                         <li><a href="#/about">About Us</a></li>
                      
                     </ul>
+                    <div class="container" ng-show="!MainController.authenticated">
+	Login with: <a href="/login">Facebook</a>
+</div>
+<div class="container" ng-show="MainController.authenticated">
+	Logged in as: <span ng-bind="MainController.user"></span>
+</div>
                    <!-- <ul class="nav navbar-nav pull-right">
                         <c:if test="${pageContext.request.userPrincipal.name != null}">
                             <li><a>Welcome: ${pageContext.request.userPrincipal.name}</a></li>
