@@ -107,13 +107,13 @@ app.controller('MainController', function($scope,$http, $location) {
       $scope.authenticated = false;
     });
     
-    self.logout = function() {
+    $scope.logout = function() {
         $http.post('/logout', {}).success(function() {
-          self.authenticated = false;
+          scope.authenticated = false;
           $location.path("/");
         }).error(function(data) {
           console.log("Logout failed")
-          self.authenticated = false;
+          $scope.authenticated = false;
         });
       };
 });
