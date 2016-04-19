@@ -23,6 +23,9 @@
 </div>
 <div class="container" ng-show="MainController.authenticated">
 	Logged in as: <span ng-bind="MainController.user"></span>
+	<div>
+    <button ng-click="MainController.logout()" class="btn btn-primary">Logout</button>
+  </div>
 </div>
                    <!-- <ul class="nav navbar-nav pull-right">
                         <c:if test="${pageContext.request.userPrincipal.name != null}">

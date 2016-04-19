@@ -95,7 +95,7 @@ app.config(function($routeProvider){
 
 //Controllers
 
-app.controller('MainController', function($http) {
+app.controller('MainController', function($http, $location) {
 	var self = this;
     $http.get("/user").success(function(data) {
       self.user = data.userAuthentication.details.name;
@@ -104,6 +104,16 @@ app.controller('MainController', function($http) {
       self.user = "N/A";
       self.authenticated = false;
     });
+    
+    self.logout = function() {
+        $http.post('/logout', {}).success(function() {
+          self.authenticated = false;
+          $location.path("/");
+        }).error(function(data) {
+          console.log("Logout failed")
+          self.authenticated = false;
+        });
+      };
 });
 
 app.controller('ProductListCtrl', function($scope,ProductService, sharedData) {
