@@ -1,4 +1,4 @@
-security:
+facebook:
   oauth2:
     client:
       clientId: 202567820135149
