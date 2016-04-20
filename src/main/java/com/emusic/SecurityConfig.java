@@ -48,47 +48,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
     OAuth2ClientContext oauth2ClientContext;
 
-	
-	  /*@Override
-	  protected void configure(HttpSecurity http) throws Exception {
-		http.headers().frameOptions().sameOrigin().httpStrictTransportSecurity().disable()
-		.and().csrf().csrfTokenRepository(csrfTokenRepository())
-	    .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
-	    //http 
-	    //  .antMatcher("/**")
-	     // .authorizeRequests()
-	     //   .antMatchers("/", "/login**", "/webjars/**")
-	     //   .permitAll()  
-	     // .anyRequest()
-	    //  .authenticated();
-	      //.and().logout().logoutSuccessUrl("/").permitAll();
-	    
-	  }*/
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		// @formatter:off	
-		http.antMatcher("/**")
-			.authorizeRequests()
-				.antMatchers("/", "/login**", "/webjars/**").permitAll()
-				.anyRequest().authenticated()
-			.and().exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/"))
-			.and().logout().logoutSuccessUrl("/").permitAll()
-			.and().csrf().csrfTokenRepository(csrfTokenRepository())
-			.and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
-			.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
-		// @formatter:on
+	@Bean
+	public FilterRegistrationBean oauth2ClientFilterRegistration(
+	    OAuth2ClientContextFilter filter) {
+	  FilterRegistrationBean registration = new FilterRegistrationBean();
+	  registration.setFilter(filter);
+	  registration.setOrder(-100);
+	  return registration;
 	}
-	
-	
-	private Filter ssoFilter() {
-		OAuth2ClientAuthenticationProcessingFilter facebookFilter = new OAuth2ClientAuthenticationProcessingFilter("/login/facebook");
-		OAuth2RestTemplate facebookTemplate = new OAuth2RestTemplate(facebook(), oauth2ClientContext);
-		facebookFilter.setRestTemplate(facebookTemplate);
-		facebookFilter.setTokenServices(new UserInfoTokenServices(facebookResource().getUserInfoUri(), facebook().getClientId()));
-		return facebookFilter;
-	}
-	
 	
 	@Bean
 	@ConfigurationProperties("facebook.client")
@@ -102,6 +69,49 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new ResourceServerProperties();
 	}
 
+	  @Override
+	  protected void configure(HttpSecurity http) throws Exception {
+		http.headers().frameOptions().sameOrigin().httpStrictTransportSecurity().disable()
+		.and().csrf().csrfTokenRepository(csrfTokenRepository())
+	    .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
+	    .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
+	    //http 
+	    //  .antMatcher("/**")
+	     // .authorizeRequests()
+	     //   .antMatchers("/", "/login**", "/webjars/**")
+	     //   .permitAll()  
+	     // .anyRequest()
+	    //  .authenticated();
+	      //.and().logout().logoutSuccessUrl("/").permitAll();
+	    
+	  }
+	
+	/*@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		// @formatter:off	
+		http.antMatcher("/**")
+			.authorizeRequests()
+				.antMatchers("/", "/login**", "/webjars/**").permitAll()
+				.anyRequest().authenticated()
+			.and().exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/"))
+			.and().logout().logoutSuccessUrl("/").permitAll()
+			.and().csrf().csrfTokenRepository(csrfTokenRepository())
+			.and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
+			.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
+		// @formatter:on
+	}*/
+	
+	
+	private Filter ssoFilter() {
+		OAuth2ClientAuthenticationProcessingFilter facebookFilter = new OAuth2ClientAuthenticationProcessingFilter("/login/facebook");
+		OAuth2RestTemplate facebookTemplate = new OAuth2RestTemplate(facebook(), oauth2ClientContext);
+		facebookFilter.setRestTemplate(facebookTemplate);
+		facebookFilter.setTokenServices(new UserInfoTokenServices(facebookResource().getUserInfoUri(), facebook().getClientId()));
+		return facebookFilter;
+	}
+	
+	
+	
 private Filter csrfHeaderFilter() {
 	  return new OncePerRequestFilter() {
 	    @Override
@@ -129,14 +139,7 @@ private CsrfTokenRepository csrfTokenRepository() {
 	  return repository;
 	}
 
-@Bean
-public FilterRegistrationBean oauth2ClientFilterRegistration(
-    OAuth2ClientContextFilter filter) {
-  FilterRegistrationBean registration = new FilterRegistrationBean();
-  registration.setFilter(filter);
-  registration.setOrder(-100);
-  return registration;
-}
+
 
 }
 
