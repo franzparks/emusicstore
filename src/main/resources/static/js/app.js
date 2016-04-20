@@ -109,7 +109,7 @@ app.controller('MainController', function($scope,$http, $location) {
     
     $scope.logout = function() {
         $http.post('/logout', {}).success(function() {
-          scope.authenticated = false;
+          $scope.authenticated = false;
           $location.path("/");
         }).error(function(data) {
           console.log("Logout failed + "+data)
