@@ -19,6 +19,8 @@ package com.emusic;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -52,6 +54,7 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.filter.CompositeFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.WebUtils;
 
@@ -97,13 +100,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	private Filter ssoFilter() {
-		OAuth2ClientAuthenticationProcessingFilter facebookFilter = new OAuth2ClientAuthenticationProcessingFilter("/login/facebook");
-		OAuth2RestTemplate facebookTemplate = new OAuth2RestTemplate(facebook(), oauth2ClientContext);
-		facebookFilter.setRestTemplate(facebookTemplate);
-		facebookFilter.setTokenServices(new UserInfoTokenServices(facebookResource().getUserInfoUri(), facebook().getClientId()));
-		return facebookFilter;
-	}
 
+		  CompositeFilter filter = new CompositeFilter();
+		  List<Filter> filters = new ArrayList<>();
+
+		  OAuth2ClientAuthenticationProcessingFilter facebookFilter = new OAuth2ClientAuthenticationProcessingFilter("/login/facebook");
+		  OAuth2RestTemplate facebookTemplate = new OAuth2RestTemplate(facebook(), oauth2ClientContext);
+		  facebookFilter.setRestTemplate(facebookTemplate);
+		  facebookFilter.setTokenServices(new UserInfoTokenServices(facebookResource().getUserInfoUri(), facebook().getClientId()));
+		  filters.add(facebookFilter);
+
+		  OAuth2ClientAuthenticationProcessingFilter githubFilter = new OAuth2ClientAuthenticationProcessingFilter("/login/github");
+		  OAuth2RestTemplate githubTemplate = new OAuth2RestTemplate(github(), oauth2ClientContext);
+		  githubFilter.setRestTemplate(githubTemplate);
+		  githubFilter.setTokenServices(new UserInfoTokenServices(githubResource().getUserInfoUri(), github().getClientId()));
+		  filters.add(githubFilter);
+
+		  filter.setFilters(filters);
+		  return filter;
+
+		}
 	@Bean
 	@ConfigurationProperties("facebook.client")
 	OAuth2ProtectedResourceDetails facebook() {
