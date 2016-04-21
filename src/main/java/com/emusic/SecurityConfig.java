@@ -131,6 +131,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	ResourceServerProperties facebookResource() {
 		return new ResourceServerProperties();
 	}
+	
+	@Bean
+	@ConfigurationProperties("github.client")
+	OAuth2ProtectedResourceDetails github() {
+		return new AuthorizationCodeResourceDetails();
+	}
+
+	@Bean
+	@ConfigurationProperties("github.resource")
+	ResourceServerProperties githubResource() {
+		return new ResourceServerProperties();
+	}
 
 	private Filter csrfHeaderFilter() {
 		return new OncePerRequestFilter() {
