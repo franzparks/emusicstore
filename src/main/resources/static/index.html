@@ -18,25 +18,70 @@
 
 <body  ng-controller="MainCtrl">
 <script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script>
+<script type="text/javascript" src="/webjars/angularjs/angular-resource.min.js"></script>
+<script type="text/javascript" src="/webjars/angularjs/angular-route.min.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 <div class="navbar-wrapper">
- <div class="container">
+<div class="container">
 
-<div ng-include src="'views/header.html'" ></div>
 
-<div ng-view></div>
+    <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                            aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#/">Franz's Music Store</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#/"> Home</a></li>
+                        <li><a href="#/products">Products</a></li>
+                        <li><a href="#/about">About Us</a></li>
+                     
+                    </ul>
+                    
+                    <ul class="nav navbar-nav pull-right" >
+                            <li ng-show="authenticated"><a>{{user}}</a></li>
+                            
+                           <!--<c:if test="${pageContext.request.userPrincipal.name != 'admin'}">
+                                <li><a href="<c:url value="/customer/cart" />">Cart</a></li>
+                            </c:if>
+                            <c:if test="${pageContext.request.userPrincipal.name  == 'admin'}">
+                                <li><a href="<c:url value="/admin" />">Admin</a></li>
+                            </c:if>-->
+                        <li ng-show="!authenticated"><a href="/login/facebook"><span class="glyphicon glyphicon-log-in"></span> Facebook Login</a></li>
+                        <li ng-show="authenticated" ng-click="logout()"><a><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                 
+                    </ul>
+                    
+                </div>
+            </div>
+        </nav>
+<h1>Am here what went wrong?</h1>
 
-<div ng-include src="'views/footer.html'"></div>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
 
+
+
+<div class="row page-footer">
+   <!-- FOOTER -->
+   <hr>
+<footer>
+    <p class="pull-right"><a href="#">Back to top</a></p>
+
+    <p>&copy; 2016 Franzcorps, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+</footer>
 
 </div>
 
-</div><!-- /.container -->  
+</div>
 
+</div>  
 
 </body>
 
