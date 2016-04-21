@@ -80,7 +80,8 @@ app.service('sharedData', function(){
 
 	});
 
-app.config(function($routeProvider){
+app.config(function($routeProvider,$httpProvider){
+	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 	$routeProvider
 	    .when('/',{templateUrl: 'views/carousel.html'})
 		.when('/about',{templateUrl: 'views/about.html'})
@@ -92,10 +93,9 @@ app.config(function($routeProvider){
 	
 });
 
-
 //Controllers
 
-app.controller('MainController', function($scope,$http, $location) {
+app.controller('MainCtrl', function($scope,$http, $location) {
 	$scope.self = "";
     $http.get("/user").success(function(data) {
       $scope.user = data.userAuthentication.details.name;
