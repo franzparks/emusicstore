@@ -81,9 +81,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:on
 	}
 
-	public static void main(String[] args) {
-		SpringApplication.run(SecurityConfig.class, args);
-	}
 
 	@Bean
 	public FilterRegistrationBean oauth2ClientFilterRegistration(
