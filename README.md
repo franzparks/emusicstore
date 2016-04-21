@@ -1,5 +1,5 @@
 # emusicstore
-An e-commerce app for music.
+An e-commerce app for music. Supports OAuth2 for user authentication with Facebook and Github
 
 ## Tools used
 SpringBoot
