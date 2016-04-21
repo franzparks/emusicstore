@@ -80,8 +80,7 @@ app.service('sharedData', function(){
 
 	});
 
-app.config(function($routeProvider,$httpProvider){
-	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+app.config(function($routeProvider){
 	$routeProvider
 	    .when('/',{templateUrl: 'views/carousel.html'})
 		.when('/about',{templateUrl: 'views/about.html'})
@@ -91,6 +90,10 @@ app.config(function($routeProvider,$httpProvider){
         .when('/customer/cart', {templateUrl: 'views/cart.html', controller: 'cartCtrl'})
 		.otherwise({ redirectTo: '/' });
 	
+});
+
+app.config(function($httpProvider){
+	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 });
 
 //Controllers
