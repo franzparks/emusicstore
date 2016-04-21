@@ -10,13 +10,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @author francisphiri
  *
  */
-//@SpringBootApplication
+@SpringBootApplication
 public class EmusicstoreApplication{
 
 	
-	//public static void main(String[] args) {
-    //		SpringApplication.run(EmusicstoreApplication.class, args);
-	//}
+	public static void main(String[] args) {
+    		SpringApplication.run(EmusicstoreApplication.class, args);
+	}
 	
 	
 }

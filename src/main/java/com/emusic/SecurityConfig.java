@@ -58,18 +58,12 @@ import org.springframework.web.filter.CompositeFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.WebUtils;
 
-@SpringBootApplication
-@RestController
+
 @EnableOAuth2Client
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	OAuth2ClientContext oauth2ClientContext;
-
-	@RequestMapping("/user")
-	public Principal user(Principal principal) {
-		return principal;
-	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
