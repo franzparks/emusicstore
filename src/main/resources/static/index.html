@@ -55,6 +55,7 @@
                                 <li><a href="<c:url value="/admin" />">Admin</a></li>
                             </c:if>-->
                         <li ng-show="!authenticated"><a href="/login/facebook"><span class="glyphicon glyphicon-log-in"></span> Facebook Login</a></li>
+                        <li ng-show="!authenticated"><a href="/login/github"><span class="glyphicon glyphicon-log-in"></span> Github Login</a></li>
                         <li ng-show="authenticated" ng-click="logout()"><a><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                  
                     </ul>
