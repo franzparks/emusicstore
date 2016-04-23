@@ -81,14 +81,16 @@ app.service('sharedData', function(){
 	});
 
 app.config(function($routeProvider,$httpProvider){
+	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 	$routeProvider
-		.when('/about',{templateUrl: '/views/about.html', controller : "ProductDetailsCtrl"})
+	    
+		//.when('/about',{templateUrl: '/views/about.html', controller : "ProductDetailsCtrl"})
 		.when('/products',{templateUrl: "/views/productList.html", controller : "ProductListCtrl"})
 		//.when('/products/product/details',{templateUrl: 'views/viewProduct.html',controller: 'ProductListCtrl'})
         //.when('/products/new', {templateUrl: 'views/addProduct.html', controller: 'ProductCreateCtrl'})
-        .when('/customer/cart', {templateUrl: '/views/cart.html', controller: 'cartCtrl'})
+        //.when('/customer/cart', {templateUrl: '/views/cart.html', controller: 'cartCtrl'})
 		.otherwise({ redirectTo: '/' });
-	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+	
 	
 });
 
@@ -119,7 +121,7 @@ app.controller('MainCtrl', function($scope,$http, $location) {
 });
 
 app.controller('ProductListCtrl', function($scope,ProductService, sharedData) {
-	
+	console.log("here now, where is partial?");
 	$scope.products = []
 	 $scope.prod = {};
 
