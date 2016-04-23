@@ -83,7 +83,7 @@ app.service('sharedData', function(){
 app.config(function($routeProvider,$httpProvider){
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 	$routeProvider
-	    
+	    .when('/',{templateUrl: '/views/carousel.html'})
 		.when('/about',{templateUrl: '/views/about.html'})
 		.when('/products',{templateUrl: "/views/productList.html", controller : "ProductListCtrl"})
 		.when('/products/product/details',{templateUrl: 'views/viewProduct.html',controller: 'ProductListCtrl'})
