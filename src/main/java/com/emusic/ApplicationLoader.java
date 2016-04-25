@@ -27,6 +27,7 @@ public class ApplicationLoader implements CommandLineRunner {
 		repository.save(new Product("Stage Lights","Infrastructure","Used",900.00,"The best lights for any show!","General Electric"));
 		repository.save(new Product("Dj Machine","Instruments","Used",870.00,"The best dj machine in the world!","Sony"));
 		repository.save(new Product("Discs","Instruments","Used",30.00,"The best records of all time!","Capitol Records"));
+		repository.save(new Product("CD Player","Accessories","Used",60.00,"The best digital audio player!","Philips"));
 		logger.info(String.format("App launched with following sample data: %s",repository.findAll()));
 	}
 
