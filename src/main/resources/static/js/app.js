@@ -68,7 +68,6 @@ app.service('sharedData', function(){
 			  return index;
 	  };
 		  
-	  
 	  return {
 		    addProducts: addProducts,
 		    getProducts: getProducts,
@@ -102,7 +101,6 @@ app.controller('MainCtrl', function($scope,$http, $location) {
     $http.get("/user").success(function(data) {
       $scope.user = data.userAuthentication.details.name;
       $scope.authenticated = true;
-      console.log("here now!! : "+$scope.authenticated);
       
     }).error(function() {
       $scope.user = "N/A";
@@ -186,7 +184,6 @@ app.controller('cartCtrl', function($scope,sharedData){
 	
 	$scope.grandTotal = $scope.updateGrandTotal();
 	$scope.removeFromCart = function(index){
-		console.log("removed index : "+ index);
 		$scope.cartItems.splice(index,1);
 		$scope.grandTotal = $scope.updateGrandTotal();
 	};
